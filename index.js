@@ -58,6 +58,5 @@ app.get('/home', async(req, res) => {
     
 })
 app.get('/', (req, res) => res.render('index', {title: "IPAY AFRICA", data, generatedhash}))
-app.get('/success', (req, res) => res.render('success', {title: "IPAY AFRICA", data, generatedhash}))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
