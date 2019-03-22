@@ -1,0 +1,15 @@
+html
+  head
+    title= title
+  body
+    form(action="https://payments.ipayafrica.com/v3/ke" method="POST")
+      p
+        each val, key in data 
+          input(
+            type='text'
+            name=key
+            value=val
+          )
+      input(type="submit", value="Submit")
+
+
