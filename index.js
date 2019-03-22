@@ -6,7 +6,7 @@ var fs = require('fs');
 
 const app = express()
 const port = 3000
-const callback = "http://localhost:3000/"
+const callback = "http://localhost:3000/home"
 const hashKey = 'demoCHANGED'
 
 app.set('view engine', 'pug')
@@ -27,7 +27,8 @@ console.log(datastring)
 var generatedhash = CryptoJS.HmacSHA1(datastring, hashKey).toString()
 
 
-app.get('/', async(req, res) => {
+app.get('/home', async(req, res) => {
+    res.send("Well Hello There")
     console.log(req.query)
     fs.appendFile('response.log', JSON.stringify(req.query), function(err) {
         if (err) throw err;
@@ -41,12 +42,11 @@ app.get('/', async(req, res) => {
                 data = response
                 //Check the status code to confirm whether the request was successful
                 console.log("Status Code: ",data.status)
-                if (data.status == 200){
+                if (data.status === 200){
                     //Send success message to user if successful
-                    res.send("Hello There SUCCESS is upon Us")
                     console.log("It worked")
                 } else {
-                    res.send("Hello There There was a whoopsie")   
+                    console.log("It did not work")
                 }
             })
             .then((error, err) => {
@@ -57,6 +57,7 @@ app.get('/', async(req, res) => {
     verifyPayment({"id": req.query.id, "ivm": req.query.ivm,"qwh": req.query.qwh,"afd": req.query.afd,"poi": req.query.poi,"uyt": req.query.uyt,"ifd": req.query.ifd})
     
 })
-app.get('/home', (req, res) => res.render('index', {title: "IPAY AFRICA", data, generatedhash}))
+app.get('/', (req, res) => res.render('index', {title: "IPAY AFRICA", data, generatedhash}))
+app.get('/success', (req, res) => res.render('success', {title: "IPAY AFRICA", data, generatedhash}))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
