@@ -16,4 +16,3 @@ yarn dev
 After the initial load, Go to "http:localhost:3000/" . ##DO NOT CHANGE THE VALUES.
 Submit the form and you will be redirected to homepage
 
-## Caution
